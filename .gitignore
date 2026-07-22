@@ -23,6 +23,7 @@ python/melb_regression/tmp_batch_check/
 python/melb_regression/tmp_test_outputs/
 
 # Generated reports and plots from Python tools
+*.docx
 python/*.pdf
 python/*.png
 python/**/*.png
