@@ -1,0 +1,6 @@
+pokusny soubor METHOD=4, pocet bodu=50, b=1m, h=0,2m, sigma=10MPa
+4
+50
+1
+0.2
+10e3

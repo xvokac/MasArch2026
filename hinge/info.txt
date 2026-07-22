@@ -1,0 +1,74 @@
+*** HINGE.exe ***
+
+formát vstupního souboru:
+
+1. radek  - preskakuje se, je rezervovany na poznamky
+2. radek - metoda vypoctu (cislo METHOD = 0, 1, 2 nebo 3)
+   a nasleduji dalsi vstupni udaje. Format je zavysly na metode vypoctu (METHOD).
+
+
+*** pro METHOD=1 cte ze souboru cisle v nasledujicim poradi:
+METHOD - zpùsob výpoètu
+N - pocet bodu interakcniho diagramu
+b - sirka prùøezu
+h - výška prùøezu
+sigma - max. dosažené napìtí pøi zkoušce v prostém tlaku
+epsilon - pøetvoøení, které odpovídá napìtí sigma
+lambda - udava maximalni pøetvoøení max_eps = lambda * epsilon
+k - koeficient (int) k=0 - nekoneènì velká pevnost v tlaku; k->nekoneèno - linearni prubeh napetí sigma=f(epsilon)
+
+*** pro METHOD=2 cte ze souboru cisle v nasledujicim poradi:
+METHOD - zpùsob výpoètu
+N - pocet bodu interakcniho diagramu
+b - sirka prùøezu
+h - výška prùøezu
+sigma - maximalni dovolene napìtí v tlaku - pro prostý tlak
+
+*** pro METHOD=3 cte ze souboru cisle v nasledujicim poradi:
+METHOD - zpùsob výpoètu
+N - pocet bodu interakcniho diagramu
+b - sirka prùøezu
+h - výška prùøezu
+sigma - max. dosažené napìtí pøi zkoušce v prostém tlaku
+epsilon - pøetvoøení, které odpovídá napìtí sigma
+lambda - udava maximalni pøetvoøení max_eps = lambda * epsilon
+
+*** pro METHOD=4 cte ze souboru cisle v nasledujicim poradi:
+METHOD - zpùsob výpoètu
+N - pocet bodu interakcniho diagramu
+b - sirka prùøezu
+h - výška prùøezu
+sigma - maximalni dovolene napìtí v tlaku - pro prostý tlak
+
+
+POPIS METOD:
+*************
+
+METHOD=1
+podle predpokladu z clanku:
+N.Taylor, P.Mallinder: The brittle hinge in masonry arch mechanisms. 
+The Structural Engineer/Volume 71/ No 20/19 October 1993/pp.359-366
+
+METHOD=2
+podle predpokladu z clanku:
+Thomas E. Boothby: Elastic plactic stability of jointed masonry arches..
+Engineering Structures, Vol. 19, No. 5, pp. 345-351, 1997
+V pruøezu mùže v daném bodì napìtí nabývat pouze buï hodnotu NULA 
+nebo hodnotu SIGMA%MAX. Takže tato formulace pøedstavuje plastický prùbìh
+napìtí v prùøezu - obdobnì jako napìtí v betonu pøi plastickém návrhu ŽB.
+
+METHOD=3
+podle predpokladu:
+bilinearni pracovni diagram
+sig_m - max. tlakove napeti
+eps_m - pretvoreni odpovidajici sig_m
+lam - udava mezni pretvoreni eps_max = lam * eps_m
+pracovni diagram sig = f(eps) je potom dan dvema primkami takto:    
+  (i)  pro  eps <= eps_m   plati     sig = sig_m * eps / eps_m
+  (ii) pro  eps > eps_m    plati     sig = sig_m
+  
+METHOD=4
+podle predpokladu z clanku:
+B.T.Rosson, T.E. Boothby: Hardening and shakedown of masonry arch joints
+In: Arch Bridges, Sinopoli (ed.), 1998 Balkema, Rotterdam, ISBN 90 5809 012 4
+

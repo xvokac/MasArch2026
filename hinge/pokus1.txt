@@ -1,0 +1,11 @@
+pokusny soubor METHOD=1; pocet bodu=50; b=1m; h=0,2m; sigma=10MPa; epsilon=2e-3; lambda=1,1; k=12 
+
+1
+50
+
+1
+0.2
+10e3
+2e-3
+1.1
+10
