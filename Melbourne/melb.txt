@@ -1,0 +1,143 @@
+Podrobn˝ popis programu MELB.exe
+
+
+Vstupni soubor lze zadat jako prvni parametr prikazu, nebo si o nej program 
+pozada. Vystupni soubor ma stejne jmeno, ale je pridana pripona *.out. 
+
+Dale se vytvori binarni soubory s transformacnimi maticemi *.AB a se zadanim 
+linearniho optimalizacniho problemu pro reseni simplexovou metodou *.sim. 
+Dale se vytvori dalsi textovy soubor *.txt s podrobnym vypoctem geometrie a 
+zatizeni, ktery je mozne pouzit pro dalsi zpravovani (napr. v excelu). 
+Soubory *.AB, *.sim a *.txt se ale vymazou, jestlize druhym argumentem 
+z prikazove radky neni cislo 1.
+
+Form·t vstupniho souboru:
+*************************
+P¯Ìklad vstupniho souboru:
+
+3
+1
+1
+0.2
+20
+0.6
+10
+1
+0.5 1 0.2
+0.5
+20
+1 30
+1 0.6 0.4 2.4 0
+0 10 inter.txt
+
+
+[rozpÏtÌ]
+[vzepÏtÌ] //mysli se tim svetle rozmery, tj. intrados 
+[geom_CODE] //kod geometrie ( 1-kruhovy segment, 2-parabolicky oblouk)
+[tlouöùka klenby]
+[objemov· tiha klenby]
+[s_b] //pro s_b <= 0 se neuvazuje sliding
+[poËet kv·dr˘]
+[poËet sil - n]
+[x-sova souradnice] [velikost sily] [sirka zatizeni] //celkem n hodnot sil (n radku)
+[vyska nadnasypu nad korunou klenby]
+[objemova tiha nadnasypu]
+[Q_CODE] [uhel roznaseni nadnasypem ve stupnich]
+[K_CODE] [K0] [Ka] [Kp] [K_CODE_q]
+[d_CODE] [d_sigma] [jmeno souboru s interakcnim diagramem]
+
+
+
+Form·t souboru s interakËnÌm diagramem
+**************************************
+P¯Ìklad souboru s interakËnÌm diagramem:
+
+ 1. radek - Interakcni diagram - METHOD=1
+ 50
+ 2000.000000
+ 0.000000 0.000000
+ 40.000000 3.905755
+ 80.000000 7.623020
+ 120.000000 11.151795
+ 160.000000 14.492080
+ 200.000000 17.643874
+ .....
+ 1919.953656 4.088247
+ 1960.041150 2.080362
+ 2000.000000 0.000000
+
+Legenda:
+    [1. ¯·dek je rezervovany cely pro poznamky]
+    [n] //n+1 je pocet bodu interakcniho diagramu
+    [N_max]  //maximalni normalova sila
+    [N_0 = 0.0] [M_0 = 0.0]  //prvni bod diagramu
+    [N_1] [M_1]
+    ...
+    [N_n = N_max] [M_n = 0.0] //posledni bod diagramu 
+
+
+
+Verze 1.2 oproti verzi 1.1 pracuje takto (uvazovane zmeny):
+*****************************************
+
+    a)format vstupniho souboru je jiny, pribyly informace o nadnasypu, a sirka
+      pusobeni sily od zatizeni dopravou 
+      Q_CODE - typ roznaseni zatizeni 
+             0 - nezohlednuje roznaseni ani sirku zatizeni /jen osamele sily/ 
+             1 - rovnomerne podle vysky nadnasypu primo pod silou
+             2 - nerovnomerne podle Boussinesq-a
+             
+      
+    b)dale je zde vektor KFill[0..5] pro urceni zemniho tlaku
+      Kfill[0] - K_CODE udava typ vypoctu (0 - zev vodorovneho tlaku, 
+                 1 - jen tlak v klidu, 2 - uprava zemniho tlaku 
+                 na aktivni a apasivni)
+      Kfill[1] - K0 soucinitel z. tlaku v klidu
+      Kfill[2] - Ka soucinitel aktivniho z. tlaku
+      Kfill[3] - Kp soucinitel pasivniho z. tlaku 
+      Kfill[4] - K_CODE_q (1 = soucinitel zemniho tlaku se aplikuje i na 
+                 zatizeni od vnejsich sil; 0 = vodorovne sily od dopravy
+                 pusobici z nasypu se neuvazuji)  
+      
+    c)podrobny vypis jen do jednoho souboru s nazvem *.txt 
+      (je tam vse, co drive bylo v souborech *.geo, *.ge2, *.p2 atd.) 
+      
+    d)ve vstupnim souboru dalsimi vstupy jsou
+      d_CODE - d_CODE udava typ vypoctu kloubu (0 - napeti neomezeno,
+                   1 - napeti omezeno a vypocet podle Livesley-e,
+                   2 - napeti omezeno a vypocet podle Crisfield-a & Packham-a)
+                   3 - tlakova cara jen v jadru prurezu
+      d_sigma - max. velikost normaloveho napeti v kloubu
+    
+    e)zohlednuje tihu nadnasypu a bocni tlak (K_CODE = 0 - bez bocniho tlaku
+      a K_CODE = 1 - s pasivnim zemnim tlakem (jednotny nasobek svisleho
+      zatizeni pro celou klenbu... dalsi moznosti nejsou zpracovany)
+      
+    f)zahrnuta volba geometrie klenby parametrem geom_CODE (1 = kruhovy segment,
+      2 = parabolicky oblouk)
+      
+    g)doplnen iteracni vypocet podle Livenslyho (d_CODE = 1)
+      
+    .........TO DO........................
+    
+    *)pro d_CODE = 4 - moznost pouzit interakcni diagram definovany uzivatelem
+      v podobe diskretnich bodu funkce - s vyuzitim polynomickÈ interpolace
+    
+    *)zohledneni vlivu nadnasypu - zmena bocniho tlaku podle deformaci
+
+Verze 1.1 oproti verzi 1.0 pracuje takto:
+*****************************************
+    
+    a)transformacni matice A B se zapisuji do binarniho souboru
+    
+    b)priprava pro simplexovou metodu neni pres 2 soubory *.sim a *.si2,
+      ale prostednictvim jednoho binarniho souboru
+    
+    c)vymaze vsechny pracovni soubory (zachova je jen jestlize druhym 
+      argumentem z prikazove radky je 1)   
+    
+    d)umi urcit normalove sily ve sparach a excentricity - vzdalenost 
+      od extrados
+    
+    e)umi urcit posouvajici sily ve sparach (pokud s_b je vetsi 
+       jak 0.0 a uvazuje se sliding)

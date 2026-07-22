@@ -1,0 +1,264 @@
+\documentclass[10pt]{article}
+\usepackage[a3paper,portrait,margin=13mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{microtype}
+
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\definecolor{navy}{HTML}{17324D}
+\definecolor{red}{HTML}{C94C4C}
+\definecolor{blue}{HTML}{2878A6}
+\definecolor{cyan}{HTML}{EAF5F8}
+\definecolor{rose}{HTML}{FBEDEE}
+\definecolor{gold}{HTML}{E6A23C}
+\definecolor{ink}{HTML}{263238}
+\definecolor{muted}{HTML}{66747E}
+\definecolor{paper}{HTML}{FAFAF7}
+
+\pagecolor{paper}
+\color{ink}
+
+\newcommand{\MRd}{M_{\mathrm{Rd}}}
+\newcommand{\result}[1]{\colorbox{gold!18}{\strut\(\displaystyle #1\)}}
+
+\tcbset{
+  enhanced, boxrule=0.7pt, arc=2mm, left=4mm, right=4mm,
+  top=3mm, bottom=3mm, before skip=0pt, after skip=0pt
+}
+
+\newcommand{\beamload}[1]{%
+\begin{tikzpicture}[x=1cm,y=1cm,baseline=(current bounding box.center),scale=#1]
+  \draw[line width=1.1pt] (0,0)--(5,0);
+  \foreach \x in {0.25,0.75,...,4.75}{\draw[-{Latex[length=2mm]},blue] (\x,0.62)--(\x,0.07);}
+  \draw[blue] (0.15,0.62)--(4.85,0.62);
+  \node[blue,above] at (2.5,0.64) {$q$};
+  \draw[line width=1pt] (0,-0.45)--(0,0.45);
+  \draw[line width=1pt] (5,-0.45)--(5,0.45);
+  \foreach \y in {-0.38,-0.18,0.02,0.22,0.42}{
+    \draw[muted] (-0.18,\y-0.13)--(0,\y);
+    \draw[muted] (5,\y)--(5.18,\y+0.13);
+  }
+  \draw[<->,muted] (0,-0.62)--node[fill=paper,inner sep=1pt] {$L$}(5,-0.62);
+\end{tikzpicture}}
+
+\newcommand{\ubtcase}[5]{%
+\begin{minipage}[c]{0.55\linewidth}
+\begin{tikzpicture}[x=1cm,y=1cm,baseline=(current bounding box.center)]
+  \def\LL{5.2}\def\xx{#1}\def\dd{0.72}
+  \draw[line width=.9pt] (0,-.38)--(0,.72);
+  \draw[line width=.9pt] (\LL,-.38)--(\LL,.72);
+  \foreach \y in {-.30,-.08,.14,.36,.58}{
+    \draw[muted] (-.17,\y-.12)--(0,\y);
+    \draw[muted] (\LL,\y)--(\LL+.17,\y+.12);
+  }
+  \draw[muted,dashed] (0,0)--(\LL,0);
+  \foreach \x in {.25,.75,...,5.0}{\draw[-{Latex[length=1.7mm]},blue] (\x,.50)--(\x,.06);}
+  \draw[blue] (.12,.50)--(5.08,.50);
+  \node[blue,above] at (2.6,.50) {$q$};
+  \draw[line width=1.35pt,red] (0,0)--(\xx,-\dd)--(\LL,0);
+  \fill[red] (0,0) circle (1.25mm);
+  \fill[paper,draw=red,line width=.9pt] (\xx,-\dd) circle (1.65mm);
+  \fill[red] (\LL,0) circle (1.25mm);
+  \draw[-{Latex[length=1.8mm]},red] (\xx,.02)--node[right,fill=paper,inner sep=1pt] {$\delta$}(\xx,-\dd+.07);
+  \draw[red,-{Latex[length=1.5mm]}] (.56,0) arc[start angle=0,end angle=-14,radius=.56];
+  \node[red] at (.72,-.32) {$\theta_1$};
+  \draw[red,-{Latex[length=1.5mm]}] (\LL-.56,0) arc[start angle=180,end angle=194,radius=.56];
+  \node[red] at (\LL-.73,-.32) {$\theta_2$};
+  \draw[<->,muted] (0,-1.04)--node[fill=paper,inner sep=1pt] {#2}(\xx,-1.04);
+  \draw[<->,muted] (\xx,-1.04)--node[fill=paper,inner sep=1pt] {#3}(\LL,-1.04);
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.43\linewidth}
+  \small
+  $\displaystyle \theta_1=#4,\qquad \theta_2=#5$\\[1mm]
+  $\displaystyle W_{\rm int}=2\MRd(\theta_1+\theta_2)$\\[1mm]
+  $\displaystyle W_{\rm ext}=q\int_0^L v\,\mathrm dx
+     =q\,\frac{L\delta}{2}$
+\end{minipage}}
+
+\newcommand{\fixedbeamicon}{%
+  \draw[line width=.8pt] (0,0)--(4.6,0);
+  \draw[line width=.8pt] (0,-.25)--(0,.25);
+  \draw[line width=.8pt] (4.6,-.25)--(4.6,.25);
+  \foreach \y in {-.2,0,.2}{\draw[muted] (-.14,\y-.1)--(0,\y);\draw[muted] (4.6,\y)--(4.74,\y+.1);}
+}
+
+\newcommand{\lbtcase}[4]{%
+\begin{minipage}[c]{0.58\linewidth}
+\begin{tikzpicture}[x=1cm,y=1cm,baseline=(current bounding box.center)]
+  \fixedbeamicon
+  \node[anchor=east,font=\bfseries] at (-.22,.02) {#1};
+  % Stavebně-mechanická konvence: záporné momenty nad osou,
+  % kladné momenty pod osou. Obě čárkované čáry jsou meze plasticity.
+  \draw[blue!55,dashed] (0,.78)--(4.6,.78);
+  \draw[blue!55,dashed] (0,-.78)--(4.6,-.78);
+  \node[blue,anchor=east,font=\scriptsize] at (-.12,.78) {$-\MRd$};
+  \node[blue,anchor=east,font=\scriptsize] at (-.12,-.78) {$+\MRd$};
+  \draw[blue,line width=1.5pt] #2;
+\end{tikzpicture}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.39\linewidth}
+  \small #3\\[1mm]
+  \result{#4}
+\end{minipage}}
+
+\begin{document}
+\begin{tcolorbox}[colback=navy,colframe=navy,boxrule=0pt,arc=0mm,height=20mm,valign=center,left=7mm,right=7mm]
+{\color{white}\fontsize{27}{30}\selectfont\bfseries Mezní analýza vetknutého nosníku}\hfill
+{\color{white}\large Horní a dolní věta plastické únosnosti}
+\end{tcolorbox}
+\vspace{4mm}
+
+\begin{tcolorbox}[colback=navy!5,colframe=navy!35,height=25mm,valign=center]
+   \textbf{Mezní analýza} (Limit Analysis) je jedním z tradičních
+   způsobů, jak určit plastický stav konstrukce. Je alternativou k inkrementální pružnoplastické analýze konstrukcí. Mezní analýzou ale nelze stanovit deformace, tzn. ani deformační odezvu v~jednotlivých zatěžovacích krocích. Proto je její použití omezené na tuhé konstrukce s malými deformacemi, které lze zanedbat. U mezní analýzy je \textbf{dualita} mezi \textbf{kinematickou variantou} mezní analýzy (Kinematic Approach / Upper Bound Theorem) a její \textbf{statickou variantou} (Static Approach / Lower Bound Theorem). 
+\end{tcolorbox}
+
+\vspace{4mm}
+\begin{tcolorbox}[colback=white,colframe=navy!25,height=74mm]
+  {\Large\bfseries Základní myšlenka}\par\smallskip
+  \begin{minipage}[t]{0.25\textwidth}
+    \vspace{0pt}
+    \centering\beamload{0.92}\par\smallskip
+    \raggedright
+     Uvažujme vetknutý nosník s rozpětím $L$ a rovnoměrným zatížením $q$, jeho průřez s~dostatečnou rotační kapacitou plastického kloubu a s~konstantní plastickou momentovou únosností $M_{Rd}$ po celé jeho délce.
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.35\textwidth}
+    \vspace{0pt}
+    \begin{tcolorbox}[colback=rose,colframe=red!45,height=55mm]
+      {\bfseries Horní věta (kinematická)}\par
+      Pro každý zvolený kinematicky přípustný mechanismus lze určit zatížení, které je \textbf{větší nebo rovno} skutečnému meznímu zatížení. Vychází se z rovnosti práce vnějších a vnitřních sil:
+      \[
+        W_{\mathrm{int}}=W_{\mathrm{ext}}.
+      \]
+      Úlohou je ze všech kinematicky přípustných mechanismů najít ten s nejmenším $q$. Výsledek je \textcolor{red}{\bfseries horní mezí}. 
+    \end{tcolorbox}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.37\textwidth}
+    \vspace{0pt}
+    \begin{tcolorbox}[colback=cyan,colframe=blue!45,height=55mm]
+      {\bfseries Dolní věta (statická)}\par
+      Pro každý zvolený staticky přípustný stav konstrukce získáme zatížení, které je \textbf{menší nebo rovno} skutečnému meznímu zatížení. Vychází se z podmínky plasticity, která má v tomto případě tvar
+      \[
+        |M(x)|\leq \MRd.
+      \]
+      Hledáme maximální $q$ z množiny staticky přípustných stavů, které splňují jednak podmínky rovnováhy (tzn. také Schwedlerovu větu) i podmínky plasticity. Výsledek je \textcolor{blue}{\bfseries dolní mezí}.
+    \end{tcolorbox}
+  \end{minipage}
+\end{tcolorbox}
+
+\vspace{4mm}
+\begin{minipage}[t]{0.493\textwidth}
+  \begin{tcolorbox}[colback=rose!55,colframe=red!65,height=200mm]
+    {\Large\bfseries\textcolor{red}{1. Horní mez: přípustné kinematické mechanismy}}\par
+    \smallskip
+    Pro každý mechanismus platí $W_{\rm int}=W_{\rm ext}$. Plocha virtuálního posunu je ve všech třech případech $L\delta/2$, a proto je $W_{\rm ext}$ konstantní. Mění se jen práce vnitřních sil $W_{\rm int}$ v plastických kloubech.
+
+    \medskip
+    {\bfseries a) Vnitřní kloub v $L/4$}\par\smallskip
+    \ubtcase{1.30}{$L/4$}{$3L/4$}{4\delta/L}{4\delta/(3L)}
+    \[
+      2\MRd\!\left(\frac{4\delta}{L}+\frac{4\delta}{3L}\right)
+      =q\frac{L\delta}{2}
+      \quad\Rightarrow\quad
+      \result{q_u=\frac{64}{3}\frac{\MRd}{L^2}\approx21{,}3\frac{\MRd}{L^2}}.
+    \]
+
+    {\bfseries b) Vnitřní kloub v $L/3$}\par\smallskip
+    \ubtcase{1.73}{$L/3$}{$2L/3$}{3\delta/L}{3\delta/(2L)}
+    \[
+      2\MRd\!\left(\frac{3\delta}{L}+\frac{3\delta}{2L}\right)
+      =q\frac{L\delta}{2}
+      \quad\Rightarrow\quad
+      \result{q_u=18\frac{\MRd}{L^2}}.
+    \]
+
+    {\bfseries c) Symetrický mechanismus}\par\smallskip
+    \ubtcase{2.60}{$L/2$}{$L/2$}{2\delta/L}{2\delta/L}
+    \[
+      4\MRd\frac{2\delta}{L}=q\frac{L\delta}{2}
+      \quad\Rightarrow\quad
+      \result{q_u=16\frac{\MRd}{L^2}}.
+    \]
+    Rozhoduje \textbf{nejmenší} z nalezených horních mezí. Kinematická varianta bývá označována jako \textbf{nebezpečná}, protože když se nenajde přesné minimum, výsledek je na straně \textit{nebezpečné}.
+    
+  \end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.493\textwidth}
+  \begin{tcolorbox}[colback=cyan!55,colframe=blue!65,height=200mm]
+    {\Large\bfseries\textcolor{blue}{2. Dolní mez: staticky přípustné průběhy ohybových momentů}}\par
+    \smallskip
+    Každý momentový průběh splňuje podmínky rovnováhy s daným zatížením pro různě volené staticky neurčité proměnné, kterými mohou být např. reakce v jedné z~podpor. Dolní mez získáme z~průběhu $M(x)$ tak, že jeho největší absolutní hodnotu $\max{\left\lbrace |M(x)|\right\rbrace }$ položíme rovno $\MRd$.
+
+    \medskip
+    {\bfseries a) Ohybový moment jako na konzole}\par\smallskip
+    \lbtcase{M}{plot[smooth,domain=0:4.6,samples=45] (\x,{.78*(1-\x/4.6)^2})}{$|M(x=0)|=\dfrac{qL^2}{2}=\MRd$}{q_l=2\dfrac{\MRd}{L^2}}
+
+    \vspace{5mm}
+    {\bfseries b) Ohybový moment jako na prostém nosníku}\par\smallskip
+    \lbtcase{M}{plot[smooth,domain=0:4.6,samples=45] (\x,{-.78*4*(\x/4.6)*(1-\x/4.6)})}{$M(x=L/2)=\dfrac{qL^2}{8}=\MRd$}{q_l=8\dfrac{\MRd}{L^2}}
+
+    \vspace{5mm}
+    {\bfseries c) Ohybový moment u vetknutého nosníku podle pružné teorie}\par\smallskip
+    \lbtcase{M}{plot[smooth,domain=0:4.6,samples=45] (\x,{.78-1.17*4*(\x/4.6)*(1-\x/4.6)})}{$|M(x=0)|=\dfrac{qL^2}{12}=\MRd$}{q_l=12\dfrac{\MRd}{L^2}}
+    
+
+    \vspace{5mm}
+    {\bfseries d) Plastický průběh ohybového momentu u vetknutého nosníku}\par\smallskip
+    \lbtcase{M}{plot[smooth,domain=0:4.6,samples=45] (\x,{.78-1.56*4*(\x/4.6)*(1-\x/4.6)})}{$|M(x=0)|=\dfrac{qL^2}{16}=\MRd$}{q_l=16\dfrac{\MRd}{L^2}}
+    \[
+      |M(x=0)|=|M(x=L)|=M(x=L/2)=\dfrac{qL^2}{16}=\MRd
+      \quad\Rightarrow\quad q_l=16\frac{\MRd}{L^2}.
+    \]
+    Toto je \textbf{největší} ze všech nalezených dolních mezí. Statická varianta bývá označována jako \textbf{bezpečná}, protože i když se nenajde přesné maximum, výsledek je na straně \textit{bezpečné}. 
+    
+    \vspace{2mm}
+    Výsledný návrh je bezpečný, a to i když je daný staticky přípustný stav daleko od optimálního řešení. Konstrukce může být ale v takovém případě předimenzovaná a neekonomická. Zde by byl pro stejnou velikost zatížení nutný $\MRd$ pro řešení \textbf{a)} 8krát větší než pro optimum \textbf{d)}.
+    
+    
+
+  \end{tcolorbox}
+\end{minipage}
+
+\vspace{4mm}
+\begin{tcolorbox}[colback=white,colframe=gold,boxrule=1.2pt,height=30mm]
+  {\Large\bfseries Věty se setkaly}\par\smallskip
+  \begin{minipage}[c]{0.63\textwidth}
+    Protože horní a dolní mez jsou shodné,
+    \[
+      q_l=q_u=q_{\mathrm{lim}},
+    \]
+    je nalezené řešení současně kinematicky i staticky přípustné. Známe tedy přesné mezní zatížení.
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.32\textwidth}
+    \centering
+    \begin{tcolorbox}[colback=gold!14,colframe=gold,boxrule=0.9pt]
+      \[
+        \boxed{q_{\mathrm{lim}}=16\,\frac{\MRd}{L^2}}
+      \]
+    \end{tcolorbox}
+  \end{minipage}
+\end{tcolorbox}
+
+\vspace{4mm}
+\begin{tcolorbox}[colback=navy!5,colframe=navy!35,height=17mm,valign=center]
+	\textbf{Mezní analýza konstrukcí vede k optimalizační úloze}, která minimalizuje nebo maximalizuje zatížení. Většinou se jedná o optimalizační metodu lineárního programování, která se řeší často simplexovou metodou. Duality problémů se někdy využívá při pokročilých algoritmech lineárního programování. 
+\end{tcolorbox}
+
+\vspace{3mm}
+{\small\color{muted}
+\textbf{Poznámka:} Je použita stavebně-mechanická konvence: záporné momenty jsou kresleny nad osou a kladné pod osou.  
+\hfill Mezní analýza konstrukcí · výukový plakát · pracovní verze 3}
+\end{document}

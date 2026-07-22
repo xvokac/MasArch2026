@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "D:\Documents\2026\MASARCH2026\python\melb_regression\batch_klenba_interaction.py", line 77, in main
+    write_melb_outputs(input_path, txt_path, out_path)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Documents\2026\MASARCH2026\python\melb_regression\melb_regression\output.py", line 16, in write_melb_outputs
+    return write_melb_outputs_for_data(data, txt_path, out_path)
+  File "D:\Documents\2026\MASARCH2026\python\melb_regression\melb_regression\output.py", line 24, in write_melb_outputs_for_data
+    result = solve_melb_iterations(data)
+  File "D:\Documents\2026\MASARCH2026\python\melb_regression\melb_regression\builder.py", line 202, in solve_melb_iterations
+    initial = _solve_prepared_step(data, prepared, None, index=0)
+  File "D:\Documents\2026\MASARCH2026\python\melb_regression\melb_regression\builder.py", line 330, in _solve_prepared_step
+    raise MelbSolveError(result, data)
+melb_regression.builder.MelbSolveError: Vypocet se zamkl: linearni program je neomezeny (unbounded).
+
+To obvykle znamena, ze zadani pripousti mechanismus bez konecneho nasobku zatizeni, nebo chybi nektere omezujici vazby. Zkontrolujte zejmena geometrii, pocet bloku, smer a polohu zatizeni, klouzani s_b a zvolenou pevnostni metodu d_CODE.
+
+Soubor: masarch_input.in
+Parametry: N=35, geom_CODE=1, Q_CODE=1, K_CODE=0, d_CODE=2
+Stav solveru: 3
+HiGHS: The problem is unbounded. (HiGHS Status 10: model_status is Unbounded; primal_status is Feasible)

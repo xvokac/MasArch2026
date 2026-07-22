@@ -1,0 +1,18 @@
+klenba_4.in
+3.14                // span
+0.26                // rise
+1                // geom_CODE 1=circle 2=parabola
+0.14                // D
+24.3                // gamma masonry
+0.1                // sliding coefficient
+25                // block count
+4                // point load count
+0.25 0.5 0.5                // x force width
+0.75 0.5 0.5                // x force width
+1.25 0.5 0.5                // x force width
+1.75 0.5 0.5                // x force width
+0.1                // fill height
+21.76                // fill unit weight
+1 0                // Q_CODE fill spread angle [deg]
+0 0.6 0.4 2.4 0                // K_CODE K0 Ka Kp K_CODE_q
+2 950 inter.txt                // d_CODE d_sigma interaction

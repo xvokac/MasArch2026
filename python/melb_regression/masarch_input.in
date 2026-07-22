@@ -1,0 +1,16 @@
+masarch_input.in
+3                // span
+0.2                // rise
+1                // geom_CODE 1=circle 2=parabola
+0.3                // D
+22                // gamma masonry
+0.6                // sliding coefficient
+35                // block count
+2                // point load count
+1 1 0.2                // x force width
+0.5 1 0.2                // x force width
+0.25                // fill height
+18                // fill unit weight
+1 30                // Q_CODE fill spread angle [deg]
+0 0.5 0.3333 3 0                // K_CODE K0 Ka Kp K_CODE_q
+2 2000 inter.txt                // d_CODE d_sigma interaction

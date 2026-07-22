@@ -1,0 +1,32 @@
+# Project: melb
+# Makefile created by Dev-C++ 4.9.9.0
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = main.o NRUTIL.o $(RES)
+LINKOBJ  = main.o NRUTIL.o $(RES)
+LIBS =  -L"E:/Program Files/Dev-Cpp/lib"  
+INCS =  -I"E:/Program Files/Dev-Cpp/include" 
+CXXINCS =  -I"E:/Program Files/Dev-Cpp/include/c++/3.3.1"  -I"E:/Program Files/Dev-Cpp/include/c++/3.3.1/mingw32"  -I"E:/Program Files/Dev-Cpp/include/c++/3.3.1/backward"  -I"E:/Program Files/Dev-Cpp/lib/gcc-lib/mingw32/3.3.1/include"  -I"E:/Program Files/Dev-Cpp/include" 
+BIN  = MELB.exe
+CXXFLAGS = $(CXXINCS)  
+CFLAGS = $(INCS)  
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before MELB.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "MELB.exe" $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+NRUTIL.o: NRUTIL.C
+	$(CC) -c NRUTIL.C -o NRUTIL.o $(CFLAGS)

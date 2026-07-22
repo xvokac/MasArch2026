@@ -1,0 +1,2 @@
+input,status,error,joint,N,e,D,M,txt,out,plot
+masarch_input.in,ERROR,Vypocet se zamkl: linearni program je neomezeny (unbounded).,,,,,,,,

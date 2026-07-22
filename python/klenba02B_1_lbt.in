@@ -1,0 +1,22 @@
+# ArchLBT input
+# Unit convention: use one consistent force-length system.
+# Geometry is in length units, typical m. Unit weights are force/volume, typical kN/m3.
+# Surface point_load force F is the total force on the loaded length, typical kN.
+# Self-weight and fill loads are multiplied internally by arch_width; point_load F is not.
+span = 5.2
+rise = 0.55
+geom_code = 1
+# extrados_mode: normal, horizontal, horizontal_width_radial_joints.
+extrados_mode = horizontal
+thickness = 0.6
+# arch_width is the out-of-plane width b of the analysed arch strip.
+arch_width = 0.5
+masonry_unit_weight = 24.3
+block_count = 20
+point_load = 2.6 230 5.2
+fill_height = 0.05
+fill_unit_weight = 21.76
+q_code = 1
+fill_spread_angle_deg = 0
+friction_coefficient = 0.6
+compression_strength = 1100

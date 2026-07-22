@@ -1,0 +1,33 @@
+ArchLBT parabolic interaction result
+input = klenba01_3_lbt.in
+status = optimal
+lambda_max = 2.532731
+governing_joint = 8
+governing M-N joints = 8
+governing shear joints = 25
+governing compression joints = 0
+governing tension joints = 11
+Rx = 99.434764
+Ry = 35.964943
+M0 = 1.517375
+
+fc = 950.000000
+b = 1.000000
+D = 0.140000
+section depth min/max = 0.140000 / 0.140000
+N_max min/max = 133.000000 / 133.000000
+
+N min/max = 99.344008 / 105.720332
+M min/max = -1.729638 / 1.731068
+T min/max = -6.043667 / 5.635590
+
+Global equilibrium check
+moment origin = [0, 0]
+loads sum Fx = 0.000000000e+00
+loads sum Fy = -6.344292059e+01
+loads sum M = -8.923306038e+01
+left reaction = [9.943476409e+01, 3.596494318e+01], M = 1.517374521e+00
+right reaction = [-9.943476409e+01, 2.747797741e+01], M = 1.626352288e+00
+residual sum Fx = 0.000000000e+00
+residual sum Fy = 0.000000000e+00
+residual sum M = 0.000000000e+00
