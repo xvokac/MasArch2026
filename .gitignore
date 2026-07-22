@@ -1,0 +1,46 @@
+# Python bytecode/cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test and tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local Codex/work metadata
+.agents/
+.codex/
+
+# Generated Python calculation outputs
+python/arch_lbt_outputs/
+python/klenba_batch_outputs/
+python/outputs/
+python/work/
+python/melb_regression/tmp_batch_check/
+python/melb_regression/tmp_test_outputs/
+
+# Generated reports and plots from Python tools
+python/*.pdf
+python/*.png
+python/**/*.png
+*_py.out
+*_py.txt
+*_py.xlsx
+
+# LaTeX/build auxiliaries
+*.aux
+*.log
+*.synctex.gz
+
+# Local environments and editor files
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+*.swp
+*.tmp
+~$*
